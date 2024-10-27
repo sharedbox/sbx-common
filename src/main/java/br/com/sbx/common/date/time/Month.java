@@ -72,12 +72,7 @@ public enum Month implements TemporalAccessor, TemporalAdjuster{
 		
 	}
 	
-    /**
-     * Private cache of all the constants.
-     */
-    private static final Month[] ENUMS = Month.values();
-
-	@Override
+    @Override
 	public Temporal adjustInto(Temporal temporal) {
 		// TODO Auto-generated method stub
 		return null;

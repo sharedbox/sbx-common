@@ -1,7 +1,6 @@
 package br.com.sbx.common.date.time;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import br.com.sbx.common.lang.StringUtils;
@@ -25,7 +24,7 @@ public class DateConfigure {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMMM/yyyy");
 		
 		String[] dt = (date.contains("-")) ? date.split("-") : date.split("/");
-		//monthValidate(Integer.parseInt(dt[1]));
+		monthValidate(Integer.parseInt(dt[1]));
 		dayValidate(Integer.parseInt(dt[0]));
 
 		LocalDate ld = LocalDate.parse(dt[0] + "/" + dt[1] + "/" + dt[2], formatter);
@@ -35,8 +34,8 @@ public class DateConfigure {
 	/**
 	 * 
 	 * @param date
-	 */
-	private static void dateValidate(LocalDateTime date) {
+	 * /
+	private static void dateValidate(final LocalDateTime date) {
 		if (date == null) {
 			throw new IllegalArgumentException("Invalid date");
 		}
