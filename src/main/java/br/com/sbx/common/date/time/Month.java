@@ -4,8 +4,24 @@ import java.time.temporal.Temporal;
 import java.time.temporal.TemporalAccessor;
 import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalField;
+import java.util.Optional;
+import java.util.stream.Stream;
 
+import br.com.sbx.common.lang.StringUtils;
+
+/**
+ * 
+ * @author Rafael Costi [rafaelcosti@outlook.com]
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 public enum Month implements TemporalAccessor, TemporalAdjuster{
+	/**
+     * The singleton instance for the month of January with 31 days.
+     * This has the numeric value of {@code 1}.
+     */
+    NOT_FOUND(null, null, 0),
+    
 	/**
      * The singleton instance for the month of January with 31 days.
      * This has the numeric value of {@code 1}.
@@ -35,7 +51,7 @@ public enum Month implements TemporalAccessor, TemporalAdjuster{
      * The singleton instance for the month of June with 30 days.
      * This has the numeric value of {@code 6}.
      */
-    JUNE("JUNE", "JUNE", 6),
+    JUNE("JUNE", "JUNHO", 6),
     /**
      * The singleton instance for the month of July with 31 days.
      * This has the numeric value of {@code 7}.
@@ -67,9 +83,31 @@ public enum Month implements TemporalAccessor, TemporalAdjuster{
      */
     DECEMBER("DECEMBER", "DEZEMBRO", 12);
 	
+	/**
+	 * 
+	 */
+	private String month;
 	
-	private Month(String month, String monthPT, int monthOrdinal) {
-		
+	/**
+	 * 
+	 */
+	private String monthPT;
+	
+	/**I
+	 * 
+	 */
+	private int ordinalMonth;
+	
+	/**
+	 * 
+	 * @param month
+	 * @param monthPT
+	 * @param monthOrdinal
+	 */
+	private Month(String month, String monthPT, int ordinalMonth) {
+		this.month = month;
+		this.monthPT = monthPT;
+		this.ordinalMonth = ordinalMonth;
 	}
 	
     @Override
@@ -88,5 +126,34 @@ public enum Month implements TemporalAccessor, TemporalAdjuster{
 	public long getLong(TemporalField field) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	/**
+	 * 
+	 * @param month
+	 * @return
+	 */
+	public static Integer getOrdinalMonth(final String value) {
+		if (StringUtils.isEmpty(value)) {
+			return NOT_FOUND.ordinalMonth;
+		}
+		Optional<Month> response = null;
+		
+		if(StringUtils.isNumeric(value)) {
+			response = Stream.of(values())
+				.filter(i -> i.ordinalMonth == Integer.parseInt(value))
+				.findFirst();
+		} else {
+			response = Stream.of(values())
+					.filter(i -> (!StringUtils.isEmpty(i.month) && i.month.equals(value.trim().toUpperCase()))
+							|| (!StringUtils.isEmpty(i.monthPT) && i.monthPT.equals(value.trim().toUpperCase())))
+					.findFirst();
+		}
+		
+		if (!response.isPresent()) {
+			throw new IllegalArgumentException("Error get month");
+		}
+		
+		return response.get().ordinalMonth;
 	}
 }

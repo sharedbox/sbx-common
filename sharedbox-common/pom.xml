@@ -1,47 +1,42 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
                              https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>br.com.sharedbox</groupId>
-  <artifactId>sbx-common</artifactId>
-  <version>1.0.0</version>
-  <name>sbx-common</name>
-  <description>sbx-common</description>
+  <groupId>com.sharedbox</groupId>
+  <artifactId>sharedbox-common</artifactId>
+  <version>2.0.0</version>
+  <name>sharedbox-common</name>
+  <description>sharedbox-common</description>
   <packaging>jar</packaging>
   
   <properties>
-    <java.version>22</java.version>
+    <java.version>17</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    
     <!-- Apache -->
-    <apache.poi.version>5.3.0</apache.poi.version>
+    <apache.poi.version>5.2.2</apache.poi.version>
     <apache.commons.lang3.version>3.12.0</apache.commons.lang3.version>
-    <apache.commons.io.version>2.17.0</apache.commons.io.version>
+    <apache.commons.io.version>2.11.0</apache.commons.io.version>
     <apache.commons.text.version>1.9</apache.commons.text.version>
     <apache.commons-validator.version>1.7</apache.commons-validator.version>
     <apache.httpclient.version>4.5.13</apache.httpclient.version>
+    <apache.log4j.version>2.14.1</apache.log4j.version>
     <apache.maven.version>3.8.6</apache.maven.version>
-    
+    <!-- Auth0 -->
+    <auth0.jwt.version>4.0.0</auth0.jwt.version>
     <!-- Faster Xml -->
-    <fasterxml.jackson.version>2.18.0</fasterxml.jackson.version>
-    
+    <fasterxml.jackson.version>2.14.1</fasterxml.jackson.version>
     <!-- Google -->
-    <google.gson.version>2.11.0</google.gson.version>
-    <google.zxing.version>3.5.3</google.zxing.version>
-
+    <google.gson.version>2.9.0</google.gson.version>
+    <google.zxing.version>3.5.0</google.zxing.version>
     <!-- Javax -->
     <javax.servlet.api.version>4.0.1</javax.servlet.api.version>
     <javax.servlet.jsp.api.version>2.3.3</javax.servlet.jsp.api.version>
     <javax.servlet.jsp.jstl.api.version>1.2.2</javax.servlet.jsp.jstl.api.version>
     <javax.servlet.xml.soap.api>1.4.0</javax.servlet.xml.soap.api>
-    
-    <!-- JSoup -->
-    <jsoup.version>1.18.1</jsoup.version>
-    
     <!-- Spring -->
     <spring.framework.version>5.3.24</spring.framework.version>
   </properties>
@@ -62,26 +57,27 @@
       </roles>
     </developer>
   </developers>  
-
-  <dependencies>
   
+  <scm>
+    <url>https://github.com/sharedbox/sharedbox-common/</url>
+    <connection>scm:git:https://github.com/sharedbox/sharedbox-common.git</connection>
+    <developerConnection>scm:git:git@github.com/sharedbox/sharedbox-common.git</developerConnection>
+  </scm>
+  
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  
+  <dependencies>
     <!-- Apache -->
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
       <version>${apache.commons.lang3.version}</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-      <version>${apache.commons.io.version}</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-text</artifactId>
-      <version>${apache.commons.text.version}</version>
     </dependency>
     
     <dependency>
@@ -94,6 +90,18 @@
       <groupId>org.apache.poi</groupId>
       <artifactId>poi-ooxml</artifactId>
       <version>${apache.poi.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>${apache.commons.io.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-text</artifactId>
+      <version>${apache.commons.text.version}</version>
     </dependency>
     
     <dependency>
@@ -114,6 +122,32 @@
       <version>${apache.commons-validator.version}</version>
     </dependency>
     
+    <!-- Auth0 -->
+    <dependency>
+      <groupId>com.auth0</groupId>
+      <artifactId>java-jwt</artifactId>
+      <version>${auth0.jwt.version}</version>
+    </dependency>
+    
+    <!-- Fasterxml Jackson -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${fasterxml.jackson.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>${fasterxml.jackson.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <version>${fasterxml.jackson.version}</version>
+    </dependency>
+    
     <!-- Google -->
     <dependency>
       <groupId>com.google.code.gson</groupId>
@@ -131,20 +165,6 @@
       <groupId>com.google.zxing</groupId>
       <artifactId>javase</artifactId>
       <version>${google.zxing.version}</version>
-    </dependency>
-  
-    <!-- Jackson Core -->
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-core</artifactId>
-      <version>${fasterxml.jackson.version}</version>
-    </dependency>
-    
-    <!-- Jackson Annotations -->
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-annotations</artifactId>
-      <version>${fasterxml.jackson.version}</version>
     </dependency>
 
     <!-- Javax -->
@@ -179,12 +199,12 @@
       <artifactId>json</artifactId>
       <version>20210307</version>
     </dependency>
-  
+    
     <!-- JSoup -->
     <dependency>
       <groupId>org.jsoup</groupId>
       <artifactId>jsoup</artifactId>
-      <version>${jsoup.version}</version>
+      <version>1.15.3</version>
     </dependency>
     
     <!-- Junit -->
@@ -203,8 +223,14 @@
       <scope>test</scope>
     </dependency>
     
+    <!-- Spring -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <version>${spring.framework.version}</version>
+    </dependency>
   </dependencies>
-    
+  
   <build>
     <plugins>
       <plugin>

@@ -24,7 +24,8 @@ public class DateConfigure {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMMM/yyyy");
 		
 		String[] dt = (date.contains("-")) ? date.split("-") : date.split("/");
-		monthValidate(Integer.parseInt(dt[1]));
+		
+		monthValidate(Month.getOrdinalMonth(dt[1]));
 		dayValidate(Integer.parseInt(dt[0]));
 
 		LocalDate ld = LocalDate.parse(dt[0] + "/" + dt[1] + "/" + dt[2], formatter);
